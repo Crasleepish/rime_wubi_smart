@@ -1,0 +1,134 @@
+# Rime schema settings
+# encoding: utf-8
+patch:
+
+  "engine/segmentors":
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - affix_segmentor@semicolon_eng  # 分号临时英文模式
+    - affix_segmentor@zhuyin_fix  # 以形查音
+    - punct_segmentor
+    - fallback_segmentor
+
+  "engine/translators":
+    - punct_translator
+    - lua_translator@semicolon_eng_translator  # 分号临时英文模式
+    - reverse_lookup_translator
+    - table_translator
+    - table_translator@dynamic  # 智能造词
+    - lua_translator@date_translator  #快捷输入日期（输入date）
+    - table_translator@zhuyin_fix  # 以形查音
+    
+  "engine/filters":
+    - charset_filter@gb2312
+    #- lua_filter@single_char_first_filter  # 单字优先
+    - simplifier@jiayin  # 以形查音
+    - uniquifier
+
+
+  # 第五码顶字上屏
+  "speller/max_code_length": 4
+  
+  
+  # 四码唯一自动上屏
+  #"speller/auto_select": true    
+  
+  
+  # 开启自动联想
+  #"translator/enable_sentence": true
+  
+  
+  # 回车清屏（默认回车编码上屏）
+  #"key_binder/bindings/@next": { when: composing, accept: Return, send: Escape }
+  
+  
+  #空码时自动清屏
+  #"speller/auto_clear": auto
+  
+  
+  #空码时输入下一个编码，前面的空码自动清空
+  #"speller/auto_clear": manual
+  
+  
+  # 分号临时英文模式
+  "speller/delimiter": " '"
+
+  "translator@semicolon_eng_translator":
+    tag: english
+
+  semicolon_eng:
+    tag: english
+
+  "recognizer/patterns/english": "^;.*$"
+
+  
+  # 智能造词
+  dynamic:
+    __include: wubi_smart.schema:/translator
+    initial_quality: 100
+    enable_encoder: true
+    enable_user_dict: true
+    encode_commit_history: true
+    disable_user_dict_for_patterns:
+      - "^z.*$"
+
+
+  # 开启特殊字符输入（开启后按下/键进入特殊字符输入模式）
+  punctuator/import_preset: symbols_user
+  recognizer/patterns/punct: '^/([0-9]0?|[A-Za-z]+)$'
+
+  
+  # 分号、单引号上屏二三候选词
+  "key_binder/bindings":
+    - { when: composing, accept: KP_0, send: 0 }
+    - { when: composing, accept: KP_1, send: 1 }
+    - { when: composing, accept: KP_2, send: 2 }
+    - { when: composing, accept: KP_3, send: 3 }
+    - { when: composing, accept: KP_4, send: 4 }
+    - { when: composing, accept: KP_5, send: 5 }
+    - { when: composing, accept: KP_6, send: 6 }
+    - { when: composing, accept: KP_7, send: 7 }
+    - { when: composing, accept: KP_8, send: 8 }
+    - { when: composing, accept: KP_9, send: 9 }
+    - { when: has_menu, accept: semicolon, send: 2 }
+    - { when: has_menu, accept: apostrophe, send: 3 }
+  
+
+  # 以形查音
+  switches:
+    - name: ascii_mode
+      reset: 0
+      states: [ 中, 英 ]
+    - name: full_shape
+      reset: 0
+      states: [ 半角, 全角 ]
+    - name: gb2312
+      reset: 1
+      states: [ 增广, 常用 ]
+    - name: ascii_punct
+      reset: 0
+      states: [ 。，, ．， ]
+    - name: jiayin
+      reset: 1
+      
+  jiayin:
+    opencc_config: jiayin.json
+    option_name: jiayin
+    show_in_comment: true
+    comment_format:
+      - "xform/<br>/\r/"
+      - "xform/&nbsp/ /"
+    tags:
+      - zhuyin_fix
+    tips: all 
+    
+  zhuyin_fix:
+    __include: wubi_smart.schema:/translator
+    prefix: '~'
+    tips: "〔以形查音〕"
+    tag: zhuyin_fix
+    
+  "recognizer/patterns/zhuyin_fix": "~[a-y]*?$"
+  
+  

@@ -1,0 +1,7 @@
+# Rime key bindings
+# encoding: utf-8
+
+
+fix_control_space:
+  __append:
+    - { when: composing, accept: Control+space, send: Escape }
