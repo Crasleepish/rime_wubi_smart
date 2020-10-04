@@ -76,7 +76,7 @@ patch:
 
   # 开启特殊字符输入（开启后按下/键进入特殊字符输入模式）
   punctuator/import_preset: symbols_user
-  recognizer/patterns/punct: '^/([0-9]0?|[A-Za-z]+)$'
+  recognizer/patterns/punct: '^\\([0-9]0?|[A-Za-z]+)$'
 
   
   # 分号、单引号上屏二三候选词
