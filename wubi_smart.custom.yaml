@@ -125,6 +125,11 @@ patch:
     
   zhuyin_fix:
     __include: wubi_smart.schema:/translator
+    enable_user_dict: false
+    enable_sentence: false
+    enable_encoder: false
+    encode_commit_history: false
+    enable_completion: false
     prefix: '~'
     tips: "〔以形查音〕"
     tag: zhuyin_fix
