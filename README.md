@@ -1,0 +1,1 @@
+# rime_wubi_smart
