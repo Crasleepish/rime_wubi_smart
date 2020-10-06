@@ -2,7 +2,7 @@ customization:
   distribution_code_name: Weasel
   distribution_version: 0.14.3
   generator: "Rime::SwitcherSettings"
-  modified_time: "Sat Oct  3 20:31:04 2020"
+  modified_time: "Tue Oct  6 15:58:00 2020"
   rime_version: 1.5.3
 patch:
   "ascii_composer/good_old_caps_lock": true
@@ -13,10 +13,7 @@ patch:
     Shift_L: commit_code
     Shift_R: commit_code
   "key_binder/bindings":
-    __patch: 
-      - "key_bindings:/move_by_word_with_tab"
-      - "key_bindings:/paging_with_minus_equal"
-      - "key_bindings.custom:/fix_control_space"
+    __patch: ["key_bindings:/move_by_word_with_tab", "key_bindings:/paging_with_minus_equal", "key_bindings.custom:/fix_control_space"]
   "menu/page_size": 7
   "punctuator/full_shape":
     "/": "、"
@@ -25,9 +22,7 @@ patch:
     "/": "、"
     __include: "punctuation:/half_shape"
   schema_list:
-    - {schema: luna_pinyin_simp}
     - {schema: wubi_smart}
-    - {schema: wubi_trad}
   "switcher/caption": "〔方案选单〕"
   "switcher/hotkeys":
     - "Control+grave"

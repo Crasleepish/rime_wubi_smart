@@ -26,6 +26,9 @@ switches:
   - name: ascii_punct
     reset: 0
     states: [ 。，, ．， ]
+  - name: zh_trad
+    reset: 0
+    states: [ 简体, 繁體 ]
 
 engine:
   processors:
@@ -49,6 +52,7 @@ engine:
     - table_translator
   filters:
     - charset_filter@gb2312
+    - simplifier
     - uniquifier
 
 speller:
@@ -106,3 +110,7 @@ recognizer:
 
 charset_filter:
   option_name: gb2312
+  
+simplifier:
+  opencc_config: s2t.json
+  option_name: zh_trad
