@@ -17,11 +17,13 @@ patch:
     - reverse_lookup_translator
     - table_translator
     - table_translator@dynamic  # 智能造词
-    - lua_translator@date_translator  #快捷输入日期（输入date）
+    - lua_translator@date_translator  #快捷输入日期&时间（输入date）
+    - lua_translator@time_translator  #快捷输入日期&时间（输入date）
     - table_translator@zhuyin_fix  # 以形查音
     
   "engine/filters":
-    - charset_filter@gb2312
+    - lua_filter@charset_filter  #过滤时单字只检索常用字符集，单字空码时检索生僻字
+    #- charset_filter@gb2312  #过滤时去除所有非gb2312字符
     #- lua_filter@single_char_first_filter  # 单字优先
     - simplifier@jiayin  # 以形查音
     - simplifier

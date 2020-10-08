@@ -51,7 +51,7 @@ engine:
     - reverse_lookup_translator
     - table_translator
   filters:
-    - charset_filter@gb2312
+    - lua_filter@charset_filter
     - simplifier
     - uniquifier
 
@@ -107,9 +107,6 @@ recognizer:
   import_preset: default
   patterns:
     reverse_lookup: "`[a-z]*'?$"
-
-charset_filter:
-  option_name: gb2312
   
 simplifier:
   opencc_config: s2t.json
